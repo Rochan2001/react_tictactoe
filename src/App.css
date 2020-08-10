@@ -25,14 +25,14 @@ body {
 .square {
   background: #fff;
   border: 0px;
-  margin-left: 30px;
-  font-size: 44px;
+  margin-left: 26px;
+  font-size: 70px;
   font-weight: bold;
   line-height: 34px;
-  height: 34px;
+  height: 40px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 34px;
+  width: 40px;
 }
