@@ -2,6 +2,37 @@ import React from "react";
 import Square from "./SquareComponent";
 
 export default class Board extends React.Component {
+  renderBoard() {
+    let board = [];
+    let c = 0;
+    for (let i = 0; i < 3; i++) {
+      let row = [];
+      for (let j = 0; j < 3; j++) {
+        if (c === 1) {
+          row.push(<td className="vert">{this.renderSquare(c)}</td>);
+          c++;
+        } else if (c === 3) {
+          row.push(<td className="hori">{this.renderSquare(c)}</td>);
+          c++;
+        } else if (c === 4) {
+          row.push(<td className="vert hori">{this.renderSquare(c)}</td>);
+          c++;
+        } else if (c === 5) {
+          row.push(<td className="hori">{this.renderSquare(c)}</td>);
+          c++;
+        } else if (c === 7) {
+          row.push(<td className="vert">{this.renderSquare(c)}</td>);
+          c++;
+        } else {
+          row.push(<td>{this.renderSquare(c)}</td>);
+          c++;
+        }
+      }
+      console.log(row);
+      board.push(<tr key={i}>{row}</tr>);
+    }
+    return board;
+  }
   renderSquare(i) {
     return (
       <Square
@@ -13,27 +44,12 @@ export default class Board extends React.Component {
     );
   }
   render() {
+    const board = this.renderBoard();
     return (
       <div className="container">
         <h1>Tic Tac Toe</h1>
         <table>
-          <tbody>
-            <tr>
-              <td>{this.renderSquare(0)}</td>
-              <td className="vert">{this.renderSquare(1)}</td>
-              <td>{this.renderSquare(2)}</td>
-            </tr>
-            <tr>
-              <td className="hori">{this.renderSquare(3)}</td>
-              <td className="vert hori">{this.renderSquare(4)}</td>
-              <td className="hori">{this.renderSquare(5)}</td>
-            </tr>
-            <tr>
-              <td>{this.renderSquare(6)}</td>
-              <td className="vert">{this.renderSquare(7)}</td>
-              <td>{this.renderSquare(8)}</td>
-            </tr>
-          </tbody>
+          <tbody>{board}</tbody>
         </table>
       </div>
     );

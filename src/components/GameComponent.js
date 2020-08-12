@@ -11,7 +11,9 @@ export default class Game extends React.Component {
     };
   }
   jumpTo(step) {
-    this.setState({ stepNumber: step, xIsNext: step % 2 === 0 });
+    this.setState({ stepNumber: step, xIsNext: step % 2 === 0 }, () => {
+      console.log(this.state.stepNumber);
+    });
   }
   handleClick(i) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
@@ -36,7 +38,13 @@ export default class Game extends React.Component {
       return (
         <li key={move}>
           {" "}
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>{" "}
+          {this.state.stepNumber === move ? (
+            <button onClick={() => this.jumpTo(move)}>
+              <strong>{desc}</strong>
+            </button>
+          ) : (
+            <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          )}{" "}
         </li>
       );
     });
