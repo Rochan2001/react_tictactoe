@@ -8,6 +8,7 @@ export default class Game extends React.Component {
       history: [{ squares: Array(9).fill(null) }],
       isXNext: false,
       stepNumber: 0,
+      isToggle: false,
     };
   }
   jumpTo(step) {
@@ -15,6 +16,11 @@ export default class Game extends React.Component {
       console.log(this.state.stepNumber);
     });
   }
+  toggleSort = () => {
+    this.setState((state) => ({
+      isToggle: !state.isToggle,
+    }));
+  };
   handleClick(i) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
@@ -48,6 +54,7 @@ export default class Game extends React.Component {
         </li>
       );
     });
+    const moves_toggle = this.state.isToggle ? moves.sort().reverse() : moves;
     let status;
     if (winner) {
       status = "Winner: " + winner;
@@ -59,9 +66,11 @@ export default class Game extends React.Component {
         <Board squares={current.squares} onClick={(i) => this.handleClick(i)} />
         <div className="container">
           <div>
-            <h3>{status}</h3>
+            <h3>
+              {status} {"  "} <button onClick={this.toggleSort}>Sort</button>
+            </h3>
           </div>{" "}
-          <ol>{moves}</ol>
+          <ol>{moves_toggle}</ol>
         </div>
       </div>
     );
